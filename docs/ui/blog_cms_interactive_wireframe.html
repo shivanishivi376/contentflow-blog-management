@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog CMS — Interactive Wireframe</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --panel:#fff; --line:#dfe3e8; --text:#20242a; --muted:#69707d;
+    --primary:#20242a; --blue:#3b82f6; --purple:#7c3aed; --orange:#f59e0b;
+    --green:#16a34a; --red:#dc2626; --soft:#f1f3f5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+  button,input,select,textarea{font:inherit}
+  button{cursor:pointer}
+  .app{display:flex;min-height:100vh}
+  .sidebar{width:238px;background:#fff;border-right:1px solid var(--line);padding:18px 14px;position:fixed;inset:0 auto 0 0}
+  .brand{height:44px;border:1px solid var(--line);display:flex;align-items:center;padding:0 13px;font-weight:800;border-radius:8px;margin-bottom:22px}
+  .nav{display:grid;gap:5px}
+  .nav button{border:0;background:transparent;text-align:left;padding:11px 12px;border-radius:7px;color:#4d5562}
+  .nav button.active,.nav button:hover{background:#eef1f4;color:#111827}
+  .userbox{position:absolute;bottom:16px;left:14px;right:14px;border:1px solid var(--line);border-radius:8px;padding:10px;font-size:12px}
+  .userbox strong{display:block;font-size:13px}.userbox span{color:var(--muted)}
+  .main{margin-left:238px;flex:1;padding:24px 30px}
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+  h1{font-size:24px;margin:0 0 4px}.crumb{font-size:12px;color:var(--muted)}
+  .actions{display:flex;gap:8px}
+  .btn{border:1px solid var(--line);background:#fff;border-radius:7px;padding:9px 13px}
+  .btn.primary{background:#1f2937;color:#fff;border-color:#1f2937}.btn.success{background:#ecfdf3;border-color:#bbf7d0;color:#15803d}
+  .btn.danger{background:#fff1f2;border-color:#fecdd3;color:#be123c}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .tabs{display:flex;border-bottom:1px solid var(--line);gap:22px;margin-bottom:16px}
+  .tabs button{border:0;background:none;padding:11px 2px;color:var(--muted);border-bottom:2px solid transparent}
+  .tabs button.active{color:#111827;border-color:#111827}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:10px}
+  .toolbar{padding:14px;display:flex;gap:10px;justify-content:space-between}
+  .search{width:270px;border:1px solid var(--line);border-radius:7px;padding:9px 11px}
+  .table{width:100%;border-collapse:collapse;font-size:13px}
+  .table th,.table td{padding:13px 14px;border-top:1px solid var(--line);text-align:left}
+  .table th{font-size:11px;color:var(--muted);text-transform:uppercase}
+  .status{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:700}
+  .draft{background:#f1f5f9}.writing{background:#dbeafe;color:#1d4ed8}.review{background:#ede9fe;color:#6d28d9}
+  .reassign{background:#ffedd5;color:#c2410c}.publishing{background:#fef3c7;color:#b45309}.published{background:#dcfce7;color:#15803d}
+  .empty{padding:50px;text-align:center;color:var(--muted)}
+  .workflow{display:flex;align-items:center;gap:0;margin-bottom:18px}
+  .step{flex:1;position:relative;text-align:center}
+  .step:not(:last-child):after{content:"";position:absolute;top:15px;left:50%;width:100%;height:1px;background:var(--line);z-index:0}
+  .circle{position:relative;z-index:1;margin:auto;width:30px;height:30px;border:1px solid var(--line);background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px}
+  .step.active .circle{background:#1f2937;color:#fff;border-color:#1f2937}.step.done .circle{background:#e8f5ed;border-color:#86efac;color:#15803d}
+  .step label{display:block;font-size:11px;color:var(--muted);margin-top:6px}
+  .step.active label{color:#111827;font-weight:700}
+  .formpanel{max-width:1000px;margin:auto;background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px}
+  .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field{display:grid;gap:6px}.field.full{grid-column:1/-1}
+  label{font-size:12px;font-weight:700}.required{color:#dc2626}
+  input,select,textarea{width:100%;border:1px solid var(--line);border-radius:7px;padding:10px;background:#fff;outline:none}
+  textarea{resize:vertical;min-height:95px}
+  input:focus,select:focus,textarea:focus{border-color:#9ca3af}
+  .footer-actions{display:flex;justify-content:space-between;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+  .editor-layout{display:grid;grid-template-columns:1fr 280px;gap:14px}
+  .editor{border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .editor-tabs{display:flex;border-bottom:1px solid var(--line);background:#fafafa}
+  .editor-tabs button{border:0;background:transparent;padding:11px 13px;font-size:12px}
+  .editor-tabs button.active{background:#fff;font-weight:700}
+  .toolbar2{display:flex;gap:5px;padding:9px;border-bottom:1px solid var(--line)}
+  .toolbar2 button{border:1px solid var(--line);background:#fff;border-radius:5px;padding:5px 8px}
+  .contentarea{min-height:380px;padding:18px}
+  .contentarea textarea{border:0;min-height:340px;padding:0;resize:none;font-size:14px;line-height:1.7}
+  .sidecard{border:1px solid var(--line);border-radius:9px;padding:15px;height:max-content}
+  .sidecard h3{font-size:13px;margin:0 0 12px}
+  .sidecard + .sidecard{margin-top:12px}
+  .meta{display:grid;gap:10px}
+  .version{padding:9px;border:1px solid var(--line);border-radius:7px;margin-bottom:7px;font-size:11px}
+  .comment{padding:10px;border-left:3px solid #9ca3af;background:#f8fafc;margin-bottom:8px;font-size:12px}
+  .review-grid{display:grid;grid-template-columns:330px 1fr;gap:16px}
+  .detailcard{border:1px solid var(--line);border-radius:9px;padding:15px}
+  .preview{border:1px solid var(--line);border-radius:9px;padding:25px;min-height:430px}
+  .preview h2{font-size:25px;margin-top:0}.preview p{color:#4b5563;line-height:1.7}
+  .callout{padding:12px;border:1px solid #bfdbfe;background:#eff6ff;border-radius:7px;font-size:12px;color:#1e40af}
+  .rolecard{display:grid;gap:10px}.role{border:1px solid var(--line);padding:11px;border-radius:7px}.role small{color:var(--muted);display:block;margin-top:3px}
+  .published-card{border:1px solid #bbf7d0;background:#f0fdf4;padding:14px;border-radius:8px}
+  .modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.35);display:none;align-items:center;justify-content:center;z-index:20}
+  .modal{background:#fff;border-radius:10px;width:min(520px,92vw);padding:20px;border:1px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.18)}
+  .modal h2{margin-top:0;font-size:18px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+  .toast{position:fixed;right:24px;bottom:24px;background:#111827;color:#fff;padding:11px 15px;border-radius:8px;font-size:12px;display:none;z-index:30}
+  .rolebar{display:flex;gap:8px;align-items:center;margin-bottom:15px}.rolebar select{width:180px}
+  .wire-note{font-size:11px;color:var(--muted);margin-top:10px}
+  @media(max-width:900px){.sidebar{width:190px}.main{margin-left:190px;padding:18px}.editor-layout,.review-grid,.formgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">BLOG CMS</div>
+    <div class="nav">
+      <button>⌂ &nbsp; Dashboard</button>
+      <button class="active" id="blogsNav">▤ &nbsp; Blogs</button>
+      <button>◫ &nbsp; Categories</button>
+      <button>▧ &nbsp; Media</button>
+      <button>♙ &nbsp; Users</button>
+      <button>☷ &nbsp; Comments</button>
+      <button>⚙ &nbsp; Settings</button>
+    </div>
+    <div class="userbox"><strong>John Doe</strong><span>Team Owner</span></div>
+  </aside>
+
+  <main class="main">
+    <div id="appRoot"></div>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="modal">
+  <div class="modal" id="modalBody"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const blogs = [
+  {title:"How to Improve Productivity", category:"Productivity", author:"John Doe", status:"Draft", slug:"how-to-improve-productivity"},
+  {title:"AI in Content Writing", category:"AI", author:"Jane Smith", status:"In Writing", slug:"ai-in-content-writing"},
+  {title:"Future of Remote Work", category:"Work", author:"Mike Johnson", status:"In Review", slug:"future-of-remote-work"},
+  {title:"Guide to Mindful Living", category:"Lifestyle", author:"Sara Williams", status:"Re Assign", slug:"guide-to-mindful-living"},
+  {title:"Top SEO Practices", category:"Marketing", author:"John Doe", status:"In Publishing", slug:"top-seo-practices"},
+  {title:"Content Strategy 2025", category:"Marketing", author:"John Doe", status:"Published", slug:"content-strategy-2025"}
+];
+
+let state = {
+  screen:"list", userType:"team", step:1, status:"Draft",
+  title:"How to Improve Productivity", description:"Practical techniques for improving focus and getting more done.",
+  category:"Productivity", subcategory:"Time Management", primary:"productivity, focus", secondary:"habits, planning",
+  slug:"how-to-improve-productivity", writer:"Jane Smith", reviewer:"Mike Johnson", publisher:"Sara Williams",
+  author:"John Doe", content:"Start writing your blog content here...\\n\\nThis wireframe demonstrates the complete role-based publishing workflow.",
+  tab:"Editor", version:2, rejected:false, published:false
+};
+
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function statusClass(s){return ({Draft:"draft","In Writing":"writing","In Review":"review","Re Assign":"reassign","In Publishing":"publishing",Published:"published"}[s]||"draft")}
+function header(title, crumb="Dashboard › Blogs"){
+ return `<div class="topbar"><div><h1>${title}</h1><div class="crumb">${crumb}</div></div><div class="actions"></div></div>`;
+}
+function statusBadge(s){return `<span class="status ${statusClass(s)}">${s}</span>`}
+function render(){
+ const root=document.getElementById("appRoot");
+ if(state.screen==="list") root.innerHTML=renderList();
+ else root.innerHTML=renderCreate();
+ bind();
+}
+function renderList(){
+ return header("Blogs")+`
+ <div class="rolebar"><span style="font-size:12px;color:#69707d">Prototype role:</span>
+ <select id="roleSelect"><option value="team">Team Owner</option><option value="writer">Writer</option><option value="reviewer">Reviewer</option><option value="publisher">Publisher</option><option value="individual">Individual User</option></select>
+ <button class="btn primary" id="newBlog">＋ New Blog</button></div>
+ <div class="tabs"><button class="active">All Blogs</button><button>My Blogs</button><button>Assigned to Me</button><button>Trash</button></div>
+ <div class="panel"><div class="toolbar"><input class="search" placeholder="⌕  Search blogs..." id="search"><div class="actions"><button class="btn">Filter</button></div></div>
+ <table class="table"><thead><tr><th>Title</th><th>Category</th><th>Author</th><th>Status</th><th>Last Updated</th><th>Actions</th></tr></thead><tbody id="blogRows"></tbody></table></div>
+ <div class="wire-note">Wireframe prototype: actions and workflow controls are interactive. Select a role above to preview access rules.</div>`;
+}
+function rows(filter=""){
+ return blogs.filter(b=>b.title.toLowerCase().includes(filter.toLowerCase())).map((b,i)=>`
+ <tr><td><strong>${esc(b.title)}</strong><br><span style="font-size:10px;color:#8b929d">/${esc(b.slug)}</span></td>
+ <td>${esc(b.category)}</td><td>${esc(b.author)}</td><td>${statusBadge(b.status)}</td><td>Today · ${10+i}:2${i}</td>
+ <td><button class="btn" style="padding:5px 8px" onclick="openExisting(${i})">Open</button>
+ <button class="btn" style="padding:5px 8px" onclick="duplicateBlog(${i})">⋮</button></td></tr>`).join("");
+}
+function renderCreate(){
+ const labels=state.userType==="individual"?["Basic Details","Content","Publish"]:["Basic Details","Assignment","Content","Review","Publish"];
+ let wf=labels.map((x,i)=>`<div class="step ${state.step===i+1?"active":state.step>i+1?"done":""}"><div class="circle">${state.step>i+1?"✓":i+1}</div><label>${x}</label></div>`).join("");
+ return `<div class="topbar"><div><h1>${state.title||"Create Blog"}</h1><div class="crumb">Blogs › ${state.userType==="individual"?"Individual":"Team"} Workflow</div></div>
+ <div class="actions"><button class="btn" onclick="goList()">← Back to Blogs</button></div></div>
+ <div class="workflow">${wf}</div>${stepContent()}`;
+}
+function field(label,key,value,full=false,placeholder=""){
+ return `<div class="field ${full?"full":""}"><label>${label}${["title","description","category","slug"].includes(key)?' <span class="required">*</span>':""}</label>
+ <input data-key="${key}" value="${esc(value||"")}" placeholder="${placeholder}"></div>`;
+}
+function stepContent(){
+ if(state.userType==="individual"){
+   if(state.step===1) return basicDetails("Individual");
+   if(state.step===2) return contentScreen();
+   return publishScreen();
+ }
+ if(state.step===1) return basicDetails("All Users");
+ if(state.step===2) return assignmentScreen();
+ if(state.step===3) return contentScreen();
+ if(state.step===4) return reviewScreen();
+ return publishScreen();
+}
+function basicDetails(type){
+ return `<div class="formpanel"><h2 style="font-size:17px">Basic Details <span style="font-size:11px;color:#69707d">— Step 1</span></h2>
+ <div class="formgrid">
+ ${field("Title","title",state.title,false,"Enter blog title")}
+ ${field("Slug","slug",state.slug,false,"your-blog-slug")}
+ ${field("Description","description",state.description,true,"Enter short description")}
+ <div class="field"><label>Category <span class="required">*</span></label><select data-key="category"><option>Productivity</option><option>AI</option><option>Marketing</option><option>Work</option></select></div>
+ <div class="field"><label>Sub-Category</label><select data-key="subcategory"><option>Time Management</option><option>Automation</option><option>Strategy</option></select></div>
+ ${field("Primary Keywords","primary",state.primary,false,"keyword 1, keyword 2")}
+ ${field("Secondary Keywords","secondary",state.secondary,false,"keyword 1, keyword 2")}
+ </div>
+ <div class="footer-actions"><button class="btn" onclick="goList()">Cancel</button><button class="btn primary" onclick="nextStep()">Next →</button></div></div>`;
+}
+function assignmentScreen(){
+ return `<div class="formpanel"><h2 style="font-size:17px">Assignment <span style="font-size:11px;color:#69707d">— Step 2 · Team Only</span></h2>
+ <div class="callout">Only users who have accepted the team invitation appear in these lists.</div><br>
+ <div class="formgrid">
+ ${selectField("Writer","writer",["Jane Smith","John Doe","Alex Brown"])}
+ ${selectField("Reviewer","reviewer",["Mike Johnson","Sara Williams","Alex Brown"])}
+ ${selectField("Publisher","publisher",["Sara Williams","John Doe","Mike Johnson"])}
+ </div>
+ <div class="callout" style="margin-top:15px">Multiple roles may be assigned to one user, but self-approval/self-publishing can be restricted by policy.</div>
+ <div class="footer-actions"><button class="btn" onclick="prevStep()">← Back</button><button class="btn primary" onclick="assignComplete()">Save Assignment & Continue →</button></div></div>`;
+}
+function selectField(label,key,opts){
+ return `<div class="field"><label>${label} <span class="required">*</span></label><select data-key="${key}">${opts.map(o=>`<option ${state[key]===o?"selected":""}>${o}</option>`).join("")}</select></div>`;
+}
+function contentScreen(){
+ return `<div class="editor-layout"><div class="editor"><div class="editor-tabs">
+ ${["Editor","AI Assist","SEO & Meta","Versions","Comments"].map(t=>`<button class="${state.tab===t?"active":""}" onclick="state.tab='${t}';render()">${t}</button>`).join("")}</div>
+ ${state.tab==="Editor"?`<div class="toolbar2"><button><b>B</b></button><button><i>I</i></button><button>H1</button><button>☷</button><button>🔗</button><button>▦</button></div><div class="contentarea"><textarea id="content">${esc(state.content)}</textarea></div>`:
+ state.tab==="AI Assist"?`<div class="contentarea"><h3 style="margin-top:0">AI Writing Assistant</h3><div class="actions"><button class="btn" onclick="aiAction('Write draft')">✦ Write draft</button><button class="btn" onclick="aiAction('Improve')">Improve</button><button class="btn" onclick="aiAction('Expand')">Expand</button><button class="btn" onclick="aiAction('Shorten')">Shorten</button></div><p class="wire-note">Select text in the real editor to apply contextual AI actions.</p></div>`:
+ state.tab==="SEO & Meta"?`<div class="contentarea"><div class="formgrid">${field("Meta Title","metaTitle",state.metaTitle||state.title,true)}${field("Meta Description","metaDescription",state.metaDescription||state.description,true)}${field("Author Name","author",state.author,true)}</div></div>`:
+ state.tab==="Versions"?`<div class="contentarea"><h3 style="margin-top:0">Version History</h3><div class="version"><b>Version 2</b> · Current · Submitted today<br><span>Edited by ${esc(state.writer)}</span></div><div class="version"><b>Version 1</b> · Initial draft<br><span>Created by ${esc(state.writer)}</span></div></div>`:
+ `<div class="contentarea"><h3 style="margin-top:0">Comments</h3><div class="comment"><b>Mike Johnson · Version 2</b><br>Please strengthen the conclusion and add one practical example.</div><div class="comment"><b>${esc(state.writer)} · Version 2</b><br>Updated the conclusion based on feedback.</div><textarea placeholder="Add feedback or comment..."></textarea></div>`}
+ <div style="padding:10px 15px;border-top:1px solid var(--line);font-size:11px;color:#69707d;display:flex;justify-content:space-between"><span>Words: ${state.content.split(/\\s+/).length}</span><span>✓ Saved</span></div></div>
+ <div><div class="sidecard"><h3>Blog Details</h3><div class="meta"><div><b>Author</b><br>${esc(state.author)}</div><div><b>Status</b><br>${statusBadge(state.status)}</div><div><b>Assigned Writer</b><br>${esc(state.writer)}</div></div></div>
+ <div class="sidecard"><h3>Collaboration</h3><div class="rolecard"><div class="role"><b>Writer</b><small>Edit content</small></div><div class="role"><b>Reviewer</b><small>Review after submission</small></div><div class="role"><b>Publisher</b><small>Publish approved content</small></div></div></div></div></div>
+ <div class="footer-actions"><button class="btn" onclick="prevStep()">← Back</button><button class="btn primary" onclick="completeContent()">Mark as Complete →</button></div>`;
+}
+function reviewScreen(){
+ return `<div class="review-grid"><div class="detailcard"><h3 style="font-size:15px">Review Blog</h3><p><b>Title</b><br>${esc(state.title)}</p><p><b>Author</b><br>${esc(state.author)}</p><p><b>Current Version</b><br>Version ${state.version} · Today</p><button class="btn" onclick="state.tab='Versions';state.step=3;render()">View Version History</button><hr><h4>Reviewer Comments</h4><div class="comment">Please strengthen the conclusion and add one practical example.</div><textarea placeholder="Add review feedback..."></textarea></div>
+ <div class="preview"><div style="font-size:11px;color:#69707d">CONTENT PREVIEW · VERSION ${state.version}</div><h2>${esc(state.title)}</h2><p>${esc(state.description)}</p><p>${esc(state.content).replace(/\\n/g,"</p><p>")}</p>
+ <div style="display:flex;gap:10px;margin-top:28px"><button class="btn danger" onclick="rejectBlog()">Request Changes</button><button class="btn success" onclick="approveBlog()">✓ Approve</button></div></div></div>`;
+}
+function publishScreen(){
+ const approved=state.status==="In Publishing" || state.published;
+ return `<div class="formpanel"><h2 style="font-size:17px">Publish <span style="font-size:11px;color:#69707d">— Final Step</span></h2>
+ ${approved?`<div class="published-card">✓ This blog is approved and ready to publish.</div>`:`<div class="callout">Publishing is available only after Reviewer approval.</div>`}
+ <div style="margin-top:18px"><b>${esc(state.title)}</b><p style="font-size:12px;color:#69707d">/${esc(state.slug)}</p><p style="font-size:12px">Author: ${esc(state.author)} · Approved version: ${state.version}</p></div>
+ <div class="footer-actions"><button class="btn" onclick="prevStep()">← Back</button><button class="btn primary" ${approved&&!state.published?"":"disabled"} onclick="publishBlog()">Publish Now</button></div>
+ ${state.published?`<div style="border-top:1px solid var(--line);margin-top:20px;padding-top:18px"><h3 style="font-size:14px">After Publishing</h3><div class="actions"><button class="btn" onclick="viewPublished()">↗ View Published Blog</button><button class="btn" onclick="thirdParty()">↗ Publish to 3rd Party</button></div></div>`:""}</div>`;
+}
+function nextStep(){
+ saveFields(); state.step++; if(state.userType==="individual"&&state.step===2) state.status="In Writing"; render();
+}
+function prevStep(){saveFields();if(state.step>1)state.step--;render()}
+function assignComplete(){saveFields();state.status="In Writing";state.step=3;toast("Assignment saved — blog is now In Writing");render()}
+function completeContent(){saveFields();state.version++;state.status="In Review";state.step=4;toast("Content submitted for review");render()}
+function approveBlog(){state.status="In Publishing";state.step=5;toast("Approved — moved to publishing");render()}
+function rejectBlog(){state.status="Re Assign";state.rejected=true;toast("Reviewer rejected the blog — Re Assign loop started");state.step=2;render()}
+function publishBlog(){state.published=true;state.status="Published";toast("Blog published successfully");render()}
+function saveFields(){
+ document.querySelectorAll("[data-key]").forEach(el=>state[el.dataset.key]=el.value);
+ const c=document.getElementById("content"); if(c)state.content=c.value;
+}
+function goList(){state.screen="list";render()}
+function openExisting(i){
+ const b=blogs[i]; state.screen="create";state.title=b.title;state.slug=b.slug;state.status=b.status;
+ state.userType="team";state.step=({Draft:1,"In Writing":3,"In Review":4,"Re Assign":2,"In Publishing":5,Published:5}[b.status]||1);
+ state.published=b.status==="Published";render();
+}
+function duplicateBlog(i){const b={...blogs[i],title:bTitle=blogs[i].title+" Copy",slug:blogs[i].slug+"-copy",status:"Draft"};blogs.unshift(b);toast("Blog duplicated as Draft");render()}
+function aiAction(a){state.content += `\\n\\n[AI ${a}] Generated/updated content would appear here.`;toast("AI action applied to draft");render()}
+function viewPublished(){openModal(`<h2>Published Blog</h2><div class="preview"><div style="font-size:11px;color:#69707d">PUBLIC URL</div><h2>${esc(state.title)}</h2><p>${esc(state.description)}</p><p>${esc(state.content).replace(/\\n/g,"</p><p>")}</p></div><div class="modal-actions"><button class="btn primary" onclick="closeModal()">Close</button></div>`)}
+function thirdParty(){openModal(`<h2>Publish to 3rd Party</h2><p style="font-size:13px;color:#69707d">Choose an external publishing destination.</p><div class="field"><label>Platform</label><select><option>Medium</option><option>Dev.to</option><option>Hashnode</option></select></div><div class="modal-actions"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="closeModal();toast('Third-party publishing queued')">Publish</button></div>`)}
+function openModal(html){document.getElementById("modalBody").innerHTML=html;document.getElementById("modal").style.display="flex"}
+function closeModal(){document.getElementById("modal").style.display="none"}
+function toast(t){const x=document.getElementById("toast");x.textContent=t;x.style.display="block";setTimeout(()=>x.style.display="none",2200)}
+function bind(){
+ const rs=document.getElementById("roleSelect");if(rs){rs.value=state.userType==="team"?"team":state.userType;rs.onchange=()=>{state.userType=rs.value;state.screen="list";render();}}
+ const nb=document.getElementById("newBlog");if(nb)nb.onclick=()=>{state.screen="create";state.userType=(state.userType==="individual"?"individual":"team");state.step=1;state.status="Draft";state.published=false;render()}
+ const s=document.getElementById("search");if(s)s.oninput=()=>document.getElementById("blogRows").innerHTML=rows(s.value);
+ const br=document.getElementById("blogRows");if(br)br.innerHTML=rows();
+}
+window.goList=goList;window.openExisting=openExisting;window.duplicateBlog=duplicateBlog;window.nextStep=nextStep;window.prevStep=prevStep;
+window.assignComplete=assignComplete;window.completeContent=completeContent;window.rejectBlog=rejectBlog;window.approveBlog=approveBlog;window.publishBlog=publishBlog;
+window.viewPublished=viewPublished;window.thirdParty=thirdParty;window.closeModal=closeModal;window.aiAction=aiAction;
+render();
+</script>
+</body>
+</html>

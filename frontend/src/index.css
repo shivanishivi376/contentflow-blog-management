@@ -1,0 +1,870 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+:root {
+  /* Fernly Bento Color Tokens */
+  --bg: #e9ebe9;
+  --bg-canvas: #e9ebe9;
+  --bg-subtle: #f2f4f2;
+  --bg-strong: #0d3a23;
+  --panel: #ffffff;
+  --panel-border: #e3e7e4;
+  --hairline-border: #e3e7e4;
+  --outline-variant: #bfc9bf;
+  --outline: #707971;
+
+  /* Text Tokens */
+  --text: #191c1b;
+  --text-main: #191c1b;
+  --text-muted: #404942;
+  --text-subtle: #707971;
+  --text-strong: #004124;
+
+  /* Primary Accent: Pine & Mint */
+  --primary: #004124;
+  --primary-container: #155a37;
+  --primary-dark: #0d3a23;
+  --primary-light: #296a46;
+  --accent: #155a37;
+  --accent-hover: #0d3a23;
+  --accent-light: #e3f2e9;
+  --secondary: #126c41;
+  --secondary-container: #a1f5bd;
+  --on-secondary-container: #1c7246;
+
+  /* Feedback Colors */
+  --success: #155a37;
+  --success-container: #a1f5bd;
+  --warning: #d97706;
+  --warning-container: #fef3c7;
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+  --info: #0284c7;
+  --info-container: #e0f2fe;
+
+  /* Surface Container Hierarchy */
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f2f4f2;
+  --surface-container: #eceeec;
+  --surface-container-high: #e7e9e7;
+  --surface-container-highest: #e1e3e1;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 26px;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px 0 rgba(19, 26, 21, 0.04);
+  --shadow-sm: 0 2px 6px -1px rgba(19, 26, 21, 0.05), 0 1px 2px 0 rgba(19, 26, 21, 0.03);
+  --shadow-md: 0 4px 12px -1px rgba(19, 26, 21, 0.07), 0 2px 4px -1px rgba(19, 26, 21, 0.04);
+  --shadow-lg: 0 10px 24px -3px rgba(19, 26, 21, 0.09), 0 4px 6px -2px rgba(19, 26, 21, 0.04);
+  --shadow-xl: 0 20px 32px -5px rgba(19, 26, 21, 0.1), 0 10px 10px -5px rgba(19, 26, 21, 0.03);
+
+  /* Gradients */
+  --pine-gradient: linear-gradient(180deg, #155a37 0%, #0d3a23 100%);
+  --pine-gradient-hover: linear-gradient(180deg, #1c7246 0%, #124b2e 100%);
+  --pine-card-gradient: linear-gradient(145deg, #155a37 0%, #0d3a23 100%);
+  --danger-gradient: linear-gradient(180deg, #d64a4a 0%, #a32727 100%);
+  --danger-gradient-hover: linear-gradient(180deg, #e05555 0%, #b32e2e 100%);
+
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  background-color: var(--bg);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+::selection {
+  background-color: var(--secondary-container);
+  color: var(--on-secondary-container);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Material Symbols configuration */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+}
+.material-symbols-outlined.fill-icon {
+  font-variation-settings: 'FILL' 1;
+}
+
+/* Utility classes */
+.hairline-border {
+  border: 1px solid var(--hairline-border);
+}
+
+.hairline-b {
+  border-bottom: 1px solid var(--hairline-border);
+}
+
+.pine-gradient-btn {
+  background: var(--pine-gradient);
+  color: #ffffff;
+}
+.pine-gradient-btn:hover {
+  background: var(--pine-gradient-hover);
+}
+
+.pine-card-gradient {
+  background: var(--pine-card-gradient);
+  color: #ffffff;
+}
+
+.danger-gradient-btn {
+  background: var(--danger-gradient);
+  color: #ffffff;
+}
+.danger-gradient-btn:hover {
+  background: var(--danger-gradient-hover);
+}
+
+/* ==========================================================================
+   AUTHENTICATION LAYOUT & CARDS (Dual-Panel Fernly Bento)
+   ========================================================================== */
+
+.auth-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  background: radial-gradient(circle at 50% 38%, rgba(146, 213, 168, 0.16) 0%, rgba(233, 235, 233, 0.8) 55%, #e9ebe9 100%);
+}
+
+.auth-grid {
+  width: min(1080px, 100%);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--hairline-border);
+  border-radius: var(--radius-2xl);
+  padding: 16px;
+  box-shadow: var(--shadow-lg);
+}
+
+.auth-hero-panel {
+  border-radius: var(--radius-xl);
+  padding: 40px 36px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 580px;
+  background: linear-gradient(145deg, #155a37 0%, #0d3a23 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-hero-panel::after {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(161, 245, 189, 0.15) 0%, rgba(161, 245, 189, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.auth-hero-panel::before {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  left: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(161, 245, 189, 0.1) 0%, rgba(161, 245, 189, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.auth-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(161, 245, 189, 0.15);
+  color: #a1f5bd;
+  border: 1px solid rgba(161, 245, 189, 0.25);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.auth-hero-panel h1 {
+  margin: 20px 0 12px;
+  color: #ffffff;
+  font-size: clamp(1.85rem, 2.8vw, 2.5rem);
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.auth-hero-panel p {
+  max-width: 44ch;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #8ccfa3;
+  margin: 0;
+}
+
+.auth-points {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+  position: relative;
+  z-index: 2;
+}
+
+.auth-points > div {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  transition: background 0.15s ease;
+}
+
+.auth-points > div:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.auth-points span.point-num {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: rgba(161, 245, 189, 0.2);
+  color: #a1f5bd;
+  font-weight: 700;
+  font-size: 0.88rem;
+  flex-shrink: 0;
+  border: 1px solid rgba(161, 245, 189, 0.3);
+}
+
+.auth-points p {
+  margin: 0;
+  line-height: 1.35;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.auth-points span.point-desc {
+  font-size: 0.78rem;
+  color: #8ccfa3;
+}
+
+.auth-card {
+  border-radius: var(--radius-xl);
+  padding: 36px 32px;
+  background: #ffffff;
+  border: 1px solid var(--hairline-border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-card-header h2 {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 1.65rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.auth-card-header p {
+  margin: 6px 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.auth-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.auth-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  font-size: 0.88rem;
+  flex-wrap: wrap;
+}
+
+.auth-links a {
+  color: var(--primary-container);
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.auth-links a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* Segmented switcher pill */
+.auth-segmented-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.auth-segmented-container {
+  padding: 4px;
+  background: var(--surface-container-low);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--hairline-border);
+  display: inline-flex;
+  gap: 4px;
+}
+
+.auth-segmented-tab {
+  padding: 8px 24px;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.auth-segmented-tab.active {
+  background: var(--primary-container);
+  color: #ffffff;
+  box-shadow: var(--shadow-xs);
+}
+
+/* Google OAuth Button Alignment */
+.google-auth-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.google-auth-button-container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+}
+
+.google-auth-button-container > div {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.google-auth-button-container iframe {
+  margin: 0 auto !important;
+}
+
+/* ==========================================================================
+   CUSTOMER WORKSPACE & ADMIN LAYOUT (Fernly Bento)
+   ========================================================================== */
+
+.admin-layout,
+.v2-customer-shell {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-canvas);
+  color: var(--text-main);
+}
+
+/* Floating Sidebar Card matching Fernly Bento design */
+.v2-sidebar-card {
+  width: 256px;
+  min-width: 256px;
+  background: var(--surface-container-low);
+  border: 1px solid var(--hairline-border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 14px;
+  position: sticky;
+  top: 14px;
+  margin: 14px 0 14px 14px;
+  height: calc(100vh - 28px);
+  z-index: 100;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.v2-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px 14px;
+  border-bottom: 1px solid var(--hairline-border);
+  margin-bottom: 14px;
+}
+
+.v2-sidebar-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.v2-brand-badge {
+  width: 38px;
+  height: 38px;
+  background: var(--primary-container);
+  color: #ffffff;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px rgba(21, 90, 55, 0.25);
+}
+
+.v2-brand-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.v2-brand-name {
+  font-size: 1rem;
+  color: var(--primary);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.v2-brand-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.v2-sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.v2-menu-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.v2-menu-heading {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--text-subtle);
+  letter-spacing: 0.08em;
+  padding: 0 10px 4px;
+  text-transform: uppercase;
+}
+
+.v2-menu-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.v2-link-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.v2-link-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-subtle);
+  font-size: 1.15rem;
+  transition: color 0.15s ease;
+}
+
+.v2-link-arrow {
+  color: var(--outline-variant);
+  transition: transform 0.15s ease;
+}
+
+.v2-menu-link:hover {
+  background: var(--surface-container);
+  color: var(--text-main);
+}
+
+.v2-menu-link:hover .v2-link-icon {
+  color: var(--text-main);
+}
+
+.v2-menu-link.active {
+  background: var(--secondary-container);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.v2-menu-link.active .v2-link-icon {
+  color: var(--primary);
+}
+
+/* Primary Create Blog Button in Customer Menu */
+.v2-create-blog-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--pine-gradient);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  border: none;
+  cursor: pointer;
+  margin: 6px 0;
+  box-shadow: 0 2px 8px rgba(21, 90, 55, 0.25);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.v2-create-blog-btn:hover {
+  background: var(--pine-gradient-hover);
+  box-shadow: 0 4px 14px rgba(21, 90, 55, 0.35);
+  transform: translateY(-1px);
+}
+
+.v2-create-blog-btn:active {
+  transform: scale(0.98);
+}
+
+/* Footer Section */
+.v2-sidebar-footer {
+  border-top: 1px solid var(--hairline-border);
+  padding-top: 12px;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.v2-signout-card-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 14px;
+  border-radius: var(--radius-pill);
+  background: #ffffff;
+  border: 1px solid #ffdad6;
+  color: var(--error);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.v2-signout-card-btn:hover {
+  background: #fff1f0;
+  border-color: #fca5a5;
+}
+
+/* Layout Core */
+.v2-customer-main,
+.admin-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.v2-customer-content,
+.admin-panel {
+  padding: 12px 24px 28px 20px;
+  flex: 1;
+}
+
+/* Top Bar */
+.v2-topbar,
+.admin-topbar {
+  height: 58px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--hairline-border);
+  border-radius: var(--radius-xl);
+  margin: 14px 24px 0 20px;
+  padding: 0 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-xs);
+  position: sticky;
+  top: 14px;
+  z-index: 90;
+}
+
+.admin-topbar-kicker {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--primary-container);
+}
+
+/* Mobile Sidebar Backdrop */
+.v2-sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(19, 28, 22, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 99;
+}
+
+/* ==========================================================================
+   BENTO BOARD & CARDS (Spec & Visual Primitives)
+   ========================================================================== */
+
+.bento-board {
+  background: #f5f6f5;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--hairline-border);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: var(--shadow-xs);
+}
+
+.bento-hero-stat {
+  background: var(--pine-card-gradient);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-hero-stat::after {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(161, 245, 189, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Public Article Detail Styling */
+.editorial-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-main);
+}
+
+.editorial-body {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #191c1b;
+}
+
+.editorial-body p {
+  margin-bottom: 1.5rem;
+}
+
+.editorial-body h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.editorial-body h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.editorial-body blockquote {
+  border-left: 3px solid var(--primary-container);
+  padding-left: 20px;
+  margin: 2rem 0;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.editorial-body img {
+  max-width: 100%;
+  border-radius: var(--radius-md);
+  margin: 1.5rem 0;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================================================
+   MOBILE & RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .v2-sidebar-card {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin: 0;
+    height: 100vh;
+    border-radius: 0 var(--radius-2xl) var(--radius-2xl) 0;
+    transform: translateX(-105%);
+    z-index: 1000;
+    box-shadow: var(--shadow-xl);
+  }
+
+  .v2-sidebar-card.mobile-open {
+    transform: translateX(0);
+  }
+
+  .v2-sidebar-overlay.mobile-open {
+    display: block;
+  }
+
+  .v2-customer-content,
+  .admin-panel {
+    padding: 12px 14px 24px 14px;
+  }
+
+  .v2-topbar,
+  .admin-topbar {
+    margin: 10px 14px 0 14px;
+    padding: 0 14px;
+  }
+}
+
+@media (max-width: 820px) {
+  .auth-grid {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .auth-hero-panel {
+    min-height: auto;
+    padding: 28px 20px;
+  }
+
+  .bento-board {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .auth-shell {
+    padding: 12px 8px;
+  }
+
+  .auth-card {
+    padding: 24px 16px;
+  }
+
+  .v2-topbar,
+  .admin-topbar {
+    margin: 6px 8px 0 8px;
+    padding: 0 10px;
+    height: 52px;
+  }
+
+  .v2-customer-content,
+  .admin-panel {
+    padding: 8px 8px 20px 8px;
+  }
+}

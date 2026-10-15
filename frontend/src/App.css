@@ -1,0 +1,17 @@
+/* Application-level layout and global helpers */
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Print and Utility Helpers */
+@media print {
+  .v2-sidebar-card,
+  .v2-topbar,
+  .admin-sidebar,
+  .admin-topbar,
+  .v2-workflow-stepper {
+    display: none !important;
+  }
+}

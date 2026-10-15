@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#155a37"/>
+      <stop offset="100%" stop-color="#004124"/>
+    </linearGradient>
+    <linearGradient id="flow" x1="10" y1="14" x2="38" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#a1f5bd"/>
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="14" fill="url(#bg)"/>
+  <!-- Stylized "CF" lettermark with flowing lines -->
+  <path d="M16 14 C12 14, 10 17, 10 20 L10 28 C10 31, 12 34, 16 34" stroke="url(#flow)" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <path d="M22 14 L34 14" stroke="url(#flow)" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M22 14 L22 34" stroke="url(#flow)" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M22 24 L32 24" stroke="url(#flow)" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Flow dots representing content flow in UI mint -->
+  <circle cx="38" cy="20" r="2.5" fill="#a1f5bd" opacity="0.95"/>
+  <circle cx="38" cy="28" r="2.5" fill="#8ccfa3" opacity="0.8"/>
+  <circle cx="38" cy="36" r="2" fill="#5ab47a" opacity="0.6"/>
+</svg>

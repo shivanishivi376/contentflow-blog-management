@@ -1,0 +1,261 @@
+/* ==========================================================================
+   CUSTOMER WORKSPACE LAYOUT (FERNLY BENTO)
+   ========================================================================== */
+
+.v2-customer-shell {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-canvas, #e9ebe9);
+  color: var(--text-main, #191c1b);
+}
+
+.v2-customer-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Topbar matching Fernly Bento screen spec */
+.v2-customer-topbar {
+  position: sticky;
+  top: 14px;
+  z-index: 40;
+  height: 56px;
+  margin: 14px 20px 0 16px;
+  padding: 0 16px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--hairline-border, #e3e7e4);
+  border-radius: var(--radius-xl, 18px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 3px rgba(19, 26, 21, 0.04);
+}
+
+.v2-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  max-width: 440px;
+}
+
+.v2-mobile-toggle-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #f2f4f2;
+  border: 1px solid #e3e7e4;
+  color: #191c1b;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.v2-mobile-toggle-btn:hover {
+  background: #e7e9e7;
+}
+
+.v2-topbar-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.v2-search-icon-svg {
+  position: absolute;
+  left: 12px;
+  color: var(--outline, #707971);
+  pointer-events: none;
+}
+
+.v2-topbar-search-input {
+  width: 100%;
+  height: 38px;
+  padding: 0 46px 0 38px;
+  border-radius: 9999px;
+  background: var(--surface-container-low, #f2f4f2);
+  border: 1px solid var(--hairline-border, #e3e7e4);
+  font-size: 0.86rem;
+  color: var(--text-main, #191c1b);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.v2-topbar-search-input:focus {
+  background: #ffffff;
+  border-color: var(--primary-container, #155a37);
+  box-shadow: 0 0 0 3px rgba(21, 90, 55, 0.12);
+}
+
+.v2-search-shortcut-badge {
+  position: absolute;
+  right: 12px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 1px solid #e3e7e4;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #707971;
+  pointer-events: none;
+}
+
+.v2-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.v2-topbar-create-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #155a37 0%, #0d3a23 100%);
+  color: #ffffff;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(21, 90, 55, 0.2);
+  transition: all 0.15s ease;
+}
+
+.v2-topbar-create-btn:hover {
+  background: linear-gradient(180deg, #1c7246 0%, #124b2e 100%);
+  transform: translateY(-1px);
+}
+
+.v2-icon-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #404942;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.v2-icon-action-btn:hover {
+  background: #f2f4f2;
+  color: #191c1b;
+}
+
+.v2-topbar-divider {
+  width: 1px;
+  height: 22px;
+  background: #e3e7e4;
+}
+
+.v2-profile-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 12px 4px 5px;
+  background: #f8faf8;
+  border: 1px solid #e3e7e4;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.v2-profile-chip:hover {
+  background: #ffffff;
+  border-color: #bfc9bf;
+  box-shadow: 0 2px 6px rgba(19, 26, 21, 0.05);
+}
+
+.v2-profile-chip-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.v2-profile-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #004124;
+  line-height: 1.2;
+}
+
+.v2-profile-role {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #707971;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.v2-customer-content {
+  padding: 16px 20px 32px 16px;
+  flex: 1;
+}
+
+/* ==========================================================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .v2-mobile-toggle-btn {
+    display: flex;
+  }
+
+  .v2-mobile-brand-logo {
+    display: flex !important;
+  }
+
+  .v2-customer-topbar {
+    margin: 10px 14px 0 14px;
+    padding: 0 12px;
+  }
+
+  .v2-customer-content {
+    padding: 14px 14px 28px 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .v2-customer-topbar {
+    margin: 6px 8px 0 8px;
+    height: 50px;
+    padding: 0 10px;
+  }
+
+  .v2-topbar-search {
+    display: none;
+  }
+
+  .v2-create-text {
+    display: none;
+  }
+
+  .v2-topbar-create-btn {
+    padding: 0 10px;
+  }
+
+  .v2-profile-chip-text {
+    display: none;
+  }
+
+  .v2-profile-chip {
+    padding: 3px;
+  }
+
+  .v2-customer-content {
+    padding: 10px 8px 20px 8px;
+  }
+}
